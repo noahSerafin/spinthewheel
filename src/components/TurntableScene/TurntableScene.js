@@ -1,8 +1,10 @@
 import {useLocation} from "react-router-dom";
 import "./TurntableScene.scss";
 import * as THREE from "three";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import React, { useState, useEffect } from "react";
+//import base from '../../../assets/models/base';
 
 const TurntableScene = () => {  
   //var [currentPage, setCurrentPage] = useState();
@@ -21,6 +23,16 @@ const TurntableScene = () => {
 
     // Objects
     //const geometry = new THREE.TorusGeometry( .8, .3, 18, 100 );
+    const loader = new GLTFLoader();
+    loader.load(
+      '../../../assets/models/base.glb', 
+      function (gltf){
+      scene.add(gltf.scene)
+    }, undefined, function (error) {
+      console.error(error);
+    });
+    
+
     const geometry = new THREE.SphereGeometry(1, 24, 16, 1);
 
     // Texture Loader

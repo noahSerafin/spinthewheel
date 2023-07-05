@@ -9,4 +9,4 @@ const TrackList = () => {
     )
 }
 
-export default Tracklist;
+export default TrackList;
