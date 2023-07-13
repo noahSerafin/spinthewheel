@@ -1,10 +1,13 @@
 import {useLocation} from "react-router-dom";
 import "./TurntableScene.scss";
+
 import * as THREE from "three";
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+//import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+//import { TransformControls } from 'three/addons/controls/TransformControls.js'; //for spin
 import React, { useState, useEffect } from "react";
 //import base from '../../../assets/models/base';
+//import albedo from '../../../assets/textures/1004_albedo.jpeg'
 
 const TurntableScene = () => {  
   //var [currentPage, setCurrentPage] = useState();
@@ -25,19 +28,21 @@ const TurntableScene = () => {
     //const geometry = new THREE.TorusGeometry( .8, .3, 18, 100 );
     const loader = new GLTFLoader();
     loader.load(
-      '../../../assets/models/base.glb', 
-      function (gltf){
-      scene.add(gltf.scene)
-    }, undefined, function (error) {
+      '../../../assets/models/gltf/ttbody.gltf', 
+      (gltf) => {
+       console.log(gltf);
+        scene.add(gltf.scene.children[0])
+      }, undefined, function (error) {
       console.error(error);
     });
     
 
-    const geometry = new THREE.SphereGeometry(1, 24, 16, 1);
+    const geometry = new THREE.CircleGeometry(1, 60)
 
     // Texture Loader
-    //const loader = new THREE.TextureLoader()
-    //const pic = loader.load('./circ.png')
+    const texLoader = new THREE.TextureLoader()
+    const pic = texLoader.load('../../../assets/textures/1004_albedo.jpeg')
+    scene.background = pic
 
     // Materials
     /*const shadowMaterial = new THREE.MeshPhongMaterial({
@@ -45,9 +50,9 @@ const TurntableScene = () => {
       //transparent: false
     });*/
 
-    const  material = new THREE.MeshBasicMaterial({
+    const  material = new THREE.MeshStandardMaterial({
         color: "rgb(214, 35, 41)",
-        wireframe: true
+        //wireframe: true
     });
 
    
@@ -59,9 +64,9 @@ const TurntableScene = () => {
    
     //particlesMesh.castShadow = true;
     //sphere.rotation.x = Math.PI / 2
-    sphere.position.z = 0;
+    sphere.position.z = -1.0;
     sphere.position.x = -0.2;
-    sphere.position.y = -0.9;
+    sphere.position.y = 0.0;
     
     
    
@@ -103,7 +108,7 @@ const TurntableScene = () => {
     camera.position.x = 0;
     camera.position.y = 0.3;
     camera.position.z = 0.4;
-    camera.rotateX(-0.5);
+    camera.rotateX(0.0);
     scene.add(camera);
 
     // Controls
@@ -143,8 +148,8 @@ const TurntableScene = () => {
       //sphere.material = THREE.PointsMaterial
       mouseDown = false;
     };
-    document.addEventListener("mousedown", catchMouse);
-    document.addEventListener("mouseup", stopMouse);
+    //document.addEventListener("mousedown", catchMouse);
+    //document.addEventListener("mouseup", stopMouse);
 
     /**
      * Animate
@@ -155,14 +160,14 @@ const TurntableScene = () => {
      var lastmousey=-1;
      var lastmousetime;
      var mousetravel = 0;
-     document.addEventListener("mousemove", function(e) {
+     /*document.addEventListener("mousemove", function(e) {
          var mouseX = e.pageX;
          var mouseY = e.pageY;
          if (lastmousex > -1)
              mousetravel += Math.max( Math.abs(mouseX-lastmousex), Math.abs(mouseY-lastmousey) );
          lastmousex = mouseX;
          lastmousey = mouseY;
-     });
+     });*/
 
     const clock = new THREE.Clock();
 
@@ -176,12 +181,10 @@ const TurntableScene = () => {
       } else {
         sphere.rotation.y = 0.08 * elapsedTime;
       }*/
-      sphere.rotation.y = elapsedTime * 0.08;
+      sphere.rotation.z = elapsedTime * -0.3;
       //sphere.rotation.y = mousetravel *  0.00006;
       sphere.rotation.x = mousetravel * 0.0006;
-      //particlesMesh.rotation.y = mouseX * (elapsedTime * 0.00008);
-      //particlesMesh.rotation.x = mouseY * (elapsedTime * 0.00008);
-
+     
       // Render
       renderer.render(scene, camera);
 
