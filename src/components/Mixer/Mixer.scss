@@ -1,0 +1,18 @@
+.mixer{
+    .flex{
+        justify-content: space-between;
+    }
+}
+.slider-vert{
+    -webkit-appearance: slider-vertical;
+    width: 25px;
+    height: 100px;
+}
+.slider-horiz{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
