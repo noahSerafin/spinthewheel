@@ -12,10 +12,10 @@ const Mixer = (props) => {
     return(
         <div className="mixer">
             <div className="flex">
-                <input className='slider-vert' orient='vertical' type="range" min='1' max='100' value={leftVolume}/>
-                <input className='slider-vert' orient='vertical' type="range" min='1' max='100' value={rightVolume}/>
+                <input className='slider slider-vert' orient='vertical' type="range" min='1' max='100' value={leftVolume}/>
+                <input className='slider slider-vert' orient='vertical' type="range" min='1' max='100' value={rightVolume}/>
             </div>
-            <input className='slider-horiz' type="range" min='1' max='100' value={crossfade}/>
+            <input className='slider slider-horiz' type="range" min='1' max='100' value={crossfade}/>
         </div>
     )
 }
