@@ -1,3 +1,12 @@
+@keyframes playing {
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+
 .deck{
     width: 40%;
     height: 100%;
@@ -38,5 +47,9 @@
                 object-fit: cover;
             }
         }
+    }
+    .plate-playing{
+        //animation: name duration timing-function delay iteration-count direction fill-mode;
+        animation: playing 3s linear 0s infinite;
     }
 }
