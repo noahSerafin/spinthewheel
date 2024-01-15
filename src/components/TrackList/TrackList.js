@@ -1,9 +1,10 @@
 import React from "react";
+import './Tracklist.scss';
 
 const TrackList = () => {
 
     return(
-        <div className="tracklist-container">
+        <div className="tracklist">
           Tracklist
         </div>
     )
