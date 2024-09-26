@@ -1,3 +1,10 @@
 .tracklist{
     border: 1px dotted gray;
+    .track{
+        height: 160px;
+        width: 160px;
+        border: 1px dotted white;
+        cursor: grab;
+        background-color: rgba($color: #000000, $alpha: 0.2);
+    }
 }
